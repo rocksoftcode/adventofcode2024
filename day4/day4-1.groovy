@@ -35,14 +35,9 @@ scan = { x, y, index, ordinal ->
 	count
 }
 
-def count = 0
-(0..boundY).each { y ->
-	(0..boundX).each {x ->
-		if (input[y][x] == target[0]) {
-			ordinals.each {
-				count += scan(x, y, 0, it.value)
-			}
-		}
+println ((0..boundY).sum { y ->
+	(0..boundX).sum {x ->
+		if (input[y][x] == target[0]) return ordinals*.value.sum { scan(x, y, 0, it) }
+		return 0
 	}
-}
-println count
+})
