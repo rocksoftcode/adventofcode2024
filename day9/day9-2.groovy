@@ -31,4 +31,3 @@ for (def i = comp.size() - 1; i >= 0; i--) {
 }
 
 println shift.withIndex().inject(new BigInteger("0")) { a, x -> a + (x.v1 == null ? BigInteger.ZERO : x.v1 * x.v2)}
-println shift.withIndex().inject(new BigInteger("0")) { a, x -> a + (x.v1 == null ? BigInteger.ZERO : x.v1 * x.v2)}
