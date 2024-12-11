@@ -16,11 +16,8 @@ count = {num, s ->
 		def left = new BigInteger(asStr.substring(0, (len / 2).toInteger()));
 		def right = new BigInteger(asStr.substring((len / 2).toInteger()))
 		r = count(left, s - 1) + count(right, s - 1);
-	} else {
-		r = count(num * new BigInteger(2024L), s - 1);
-	}
+	} else r = count(num * new BigInteger(2024L), s - 1)
 	mem[k] = r
-	r
 }
 def input = new File('input.txt').readLines()[0].split(/\s/).collect {it.toBigInteger()}
 println input.collect {count(it, 75)}.inject(0) {acc, v -> acc + v}
