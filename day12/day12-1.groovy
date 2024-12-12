@@ -4,18 +4,18 @@ def inbounds = { pos -> pos[0] >= 0 && pos[0] < field.size() && pos[1] >= 0 && p
 def at = { pos -> pos && inbounds(pos) ? field[pos[0]][pos[1]] : '' }
 def traverse
 traverse = { pos, previous, plan ->
-	def x = pos[0], y = pos[1]
-	def k = x + ':' + y
+	def y = pos[0], x = pos[1]
+	def k = y + ':' + x
 	if (previous && at(previous) != at(pos)) return
 	if (v.contains(k)) return
 	v << k
 
-	def n = at([x - 1, y]) == at(pos) ? 0 : 1
-	def e = at([x, y + 1]) == at(pos) ? 0 : 1
-	def s = at([x + 1, y]) == at(pos) ? 0 : 1
-	def w = at([x, y - 1]) == at(pos) ? 0 : 1
+	def n = at([y - 1, x]) == at(pos) ? 0 : 1
+	def e = at([y, x + 1]) == at(pos) ? 0 : 1
+	def s = at([y + 1, x]) == at(pos) ? 0 : 1
+	def w = at([y, x - 1]) == at(pos) ? 0 : 1
 	plan[k] = s + e + n + w
-	return traverse([x + 1, y], pos, plan) || traverse([x - 1, y], pos, plan) || traverse([x, y + 1], pos, plan) || traverse([x, y - 1], pos, plan);
+	return traverse([y + 1, x], pos, plan) || traverse([y - 1, x], pos, plan) || traverse([y, x + 1], pos, plan) || traverse([y, x - 1], pos, plan);
 }
 def plot = {pos ->
 	def plan = [:]
