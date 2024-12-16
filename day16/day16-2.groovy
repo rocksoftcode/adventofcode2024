@@ -11,7 +11,7 @@ map.eachWithIndex {List<String> row, int y ->
 }
 
 def find = {s, e ->
-	def stack = [[p: s, path: [], cost: 0]], curP, seen = [:], paths = []
+	def stack = [[p: s, path: [], cost: 0]], curP, vis = [:], paths = []
 	def min = Integer.MAX_VALUE
 	while (stack) {
 		curP = stack.pop()
@@ -26,8 +26,8 @@ def find = {s, e ->
 		}
 
 		def k = curP.p.join(':')
-		if (seen[k] && seen[k] < curP.cost) continue
-		seen[k] = curP.cost
+		if (vis[k] && vis[k] < curP.cost) continue
+		vis[k] = curP.cost
 		if (curP.cost > min) continue
 
 		ords.eachWithIndex {o, i ->
@@ -43,7 +43,7 @@ def find = {s, e ->
 	paths
 }
 
-def minPaths = find(start, end)
+def mins = find(start, end)
 def all = [:]
-minPaths.each {path -> path.each {p -> all[p] = 'X'}}
+mins.each {path -> path.each {p -> all[p] = 'X'}}
 println all.keySet().size()
