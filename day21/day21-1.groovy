@@ -16,6 +16,7 @@ def findPaths = {com, start, end ->
 
 	while (inst) {
 		c = inst.pop()
+
 		if (c.dirId != null) c.path << pts[c.dirId]
 		if (com[c.p[1]][c.p[0]] == end) {
 			if (c.cost < min) {

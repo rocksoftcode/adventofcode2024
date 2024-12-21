@@ -16,6 +16,7 @@ def findPaths = {com, start, end ->
 
 	while (inst) {
 		c = inst.pop()
+
 		if (c.dirId != null) c.path << pts[c.dirId]
 		if (com[c.p[1]][c.p[0]] == end) {
 			if (c.cost < min) {
@@ -49,21 +50,21 @@ def findPaths = {com, start, end ->
 }
 
 def run
-run = {com, code, d, memo = [:] ->
+run = {com, code, d, mem = [:] ->
 	def k = code + '_' + d
-	if (memo[k] != null) return memo[k]
+	if (mem[k] != null) return mem[k]
 	def curPos = 'A', length = 0L
 	code.split('').each {nextPos ->
 		def paths = findPaths(com, curPos, nextPos)
 		if (d == 0) {
 			length += paths[0].size().toLong()
 		} else {
-			length += paths.collect {path -> run(padDir, path, d - 1, memo)}.min()
+			length += paths.collect {path -> run(padDir, path, d - 1, mem)}.min()
 		}
 		curPos = nextPos
 	}
 
-	memo[k] = length
+	mem[k] = length
 	length
 }
 
