@@ -22,9 +22,7 @@ def findPaths = {com, start, end ->
 				paths = []
 				min = c.cost
 			}
-			if (c.cost == min) {
-				paths << c.path
-			}
+			if (c.cost == min) paths << c.path
 			continue
 		}
 
@@ -45,26 +43,20 @@ def findPaths = {com, start, end ->
 		}
 	}
 
-	return paths.collect {p -> p.join('') + 'A'}
+	paths.collect {p -> p.join('') + 'A'}
 }
 
 def run
 run = {com, code, d ->
-	def k = code + '_' + d
-
 	def curPos = 'A', length = 0
-
 	code.split('').each {nextPos ->
 		def paths = findPaths(com, curPos, nextPos)
-		if (d == 0) {
-			length += paths[0].size()
-		} else {
-			length += paths.collect {path -> run(padDir, path, d - 1)}.min()
-		}
+		if (d == 0) length += paths[0].size()
+		else length += paths.collect {path -> run(padDir, path, d - 1)}.min()
 		curPos = nextPos
 	}
 
-	return length
+	length
 }
 
 println input.inject(0) {a, c -> a + c.replace('A', '').toInteger() * run(padNum, c, 2)}

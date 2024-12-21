@@ -45,16 +45,14 @@ def findPaths = {com, start, end ->
 		}
 	}
 
-	return paths.collect {p -> p.join('') + 'A'}
+	paths.collect {p -> p.join('') + 'A'}
 }
 
 def run
 run = {com, code, d, memo = [:] ->
 	def k = code + '_' + d
 	if (memo[k] != null) return memo[k]
-
 	def curPos = 'A', length = 0L
-
 	code.split('').each {nextPos ->
 		def paths = findPaths(com, curPos, nextPos)
 		if (d == 0) {
@@ -66,7 +64,7 @@ run = {com, code, d, memo = [:] ->
 	}
 
 	memo[k] = length
-	return length
+	length
 }
 
 println input.inject(0L) {res, c -> res + c.replace('A', '').toLong() * run(padNum, c, 25)}
