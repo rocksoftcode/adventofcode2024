@@ -29,7 +29,7 @@ while (ops) {
 			(op.t[0] != 'z' && !(op.p1[0] in ['x', 'y']) && !(op.p2[0] in ['x', 'y']) && op.o == 'XOR') ||
 			(op.p1[0] in ['x', 'y'] && op.p1.substring(1).toInteger() > minKey && op.p2[0] in ['x', 'y'] && op.p2.substring(1).toInteger() > minKey && op.o == 'XOR' && !orig.any {it.o == 'XOR' && (it.p1 == op.t || it.p2 == op.t)}) ||
 			(op.p1[0] in ['x', 'y'] && op.p1.substring(1).toInteger() > minKey && op.p2[0] in ['x', 'y'] && op.p2.substring(1).toInteger() > minKey && op.o == 'AND' && !orig.any {it.o == 'OR' && (it.p1 == op.t || it.p2 == op.t)}))
-		gates.push(op.t)
+		gates << op.t
 }
 
 println gates.sort().join(',')
