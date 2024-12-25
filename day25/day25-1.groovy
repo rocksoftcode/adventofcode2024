@@ -17,12 +17,12 @@ input.each {
 	} else if (it[0][0] == '.') {
 		for (x in 0..<it[0].size()) {
 			def y = it.size() - 1
-			def counter = -1
+			def c = -1
 			while (it[y][x] == '#') {
 				y--
-				counter++
+				c++
 			}
-			hts << counter
+			hts << c
 		}
 		k << hts
 	}
